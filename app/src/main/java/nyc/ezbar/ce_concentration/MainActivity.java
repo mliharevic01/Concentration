@@ -78,7 +78,10 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_stats) {
             Intent inventory_intent = new Intent(this, AllProductsActivity.class);;
             this.startActivity(inventory_intent);
-        }
+        }/*else if (id == R.id.nav_search){
+            Intent search_intent = new Intent(this, SearchActivity.class);
+            this.startActivity(search_intent);
+        }*/
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

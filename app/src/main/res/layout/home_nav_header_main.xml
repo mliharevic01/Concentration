@@ -11,14 +11,13 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
 
-    <!--contains the android image -->
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="20dp"
-        android:paddingTop="50dp"
         android:background="@drawable/back"/>
+    <!--contains the android image -->
     <!--username-->
+
 
 
     <!--email-->

@@ -24,6 +24,7 @@
         </activity>
         <activity android:name=".AllProductsActivity"/>
         <activity android:name=".RecipesActivity"/>
+        <activity android:name=".SearchActivity" />
     </application>
     <uses-permission android:name="android.permission.INTERNET" />
 </manifest>
