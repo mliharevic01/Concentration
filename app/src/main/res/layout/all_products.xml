@@ -1,8 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/all_products"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
+    tools:context="nyc.ezbar.ce_concentration.SearchActivity"
+    tools:showIn="@layout/search_app_bar_main">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar3"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:popupTheme="@style/AppTheme" />
+
     <TextView
         android:text="Liquors:"
         android:layout_width="wrap_content"
@@ -11,6 +24,7 @@
         android:textStyle="bold"
         android:paddingTop="6dip"
         android:paddingLeft="6dip"
+        android:layout_below="@id/toolbar3"
         android:id="@+id/title" />
 
     <TextView
@@ -22,10 +36,12 @@
         android:paddingRight="6dip"
         android:textSize="25dip"
         android:textStyle="bold"
+        android:layout_below="@id/toolbar3"
         android:id="@+id/title2" />
     <ListView
-        android:id="@android:id/list"
+        android:id="@+id/searchlistview"
         android:layout_width="fill_parent"
         android:layout_below="@id/title"
         android:layout_height="wrap_content"/>
+
 </RelativeLayout>

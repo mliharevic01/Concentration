@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -44,12 +45,12 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    @Override
+/*    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.activity_main_drawer, menu);
         return true;
-    }
+    }*/
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -78,10 +79,10 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_stats) {
             Intent inventory_intent = new Intent(this, AllProductsActivity.class);;
             this.startActivity(inventory_intent);
-        }/*else if (id == R.id.nav_search){
+        }else if (id == R.id.nav_search){
             Intent search_intent = new Intent(this, SearchActivity.class);
             this.startActivity(search_intent);
-        }*/
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

@@ -96,7 +96,7 @@ public class RecipesActivity extends ListActivity {
             List<NameValuePair> params = new ArrayList<NameValuePair>();
             // getting JSON string from URL
 
-            JSONObject json = jParser.makeHttpRequest(url_all_products, "GET", params);
+            JSONObject json = jParser.makeHttpRequest(url_all_products, "POST", params);
 
             // Check your log cat for JSON reponse
             Log.d("All Products: ", json.toString());

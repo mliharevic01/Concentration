@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <!-- Product id (pid) - will be HIDDEN - used to pass to other activity -->
+
+    <!-- Name Label -->
+
+    <TextView
+        android:text="ABV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="end"
+        android:paddingTop="6dip"
+        android:paddingRight="6dip"
+        android:textSize="18dip"
+        android:id="@+id/abv" />
+
+    <TextView
+        android:text="JACK"
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="6dip"
+        android:layout_marginLeft="40dip"
+        android:textSize="16dip"
+        android:layout_centerInParent="true"
+ />
+
+    <TextView
+        android:text="PID"
+        android:id="@+id/pid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="6dip"
+        android:layout_marginLeft="15dp"
+        android:textSize="18dip"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true" />
+
+</RelativeLayout>
