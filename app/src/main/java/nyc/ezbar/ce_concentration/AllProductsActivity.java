@@ -34,24 +34,27 @@ public class AllProductsActivity extends ListActivity {
     ArrayList<HashMap<String, String>> productsList;
 
     // url to get all products list
-    private static String url_all_products = "http://www.ezbar.nyc/android_connect/get_all_products.php";
+
+    private String url_all_products;
 
     // JSON Node names
     private static final String TAG_SUCCESS = "success";
-    private static final String TAG_PRODUCTS = "Liquids";
-    private static final String TAG_PID = "L_PK";
+    private static final String TAG_PRODUCTS = "Inventory";
+    private static final String TAG_LOCATION = "LocationNumber";
     private static final String TAG_NAME = "Liquid_Name";
-
+    private static final String TAG_QOH = "QoH";
     // products JSONArray
     JSONArray products = null;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.all_products);
+        setContentView(R.layout.inventory);
 
         // Hashmap for ListView
         productsList = new ArrayList<HashMap<String, String>>();
+
+        url_all_products = "http://www.ezbar.nyc/android_connect/PullFromInventory.php";
 
         // Loading products in Background Thread
         new LoadAllProducts().execute();
@@ -72,15 +75,17 @@ public class AllProductsActivity extends ListActivity {
         }
 
     }
+/*
+*
+     * Background Async Task to Load all product by making HTTP Request*/
 
-    /**
-     * Background Async Task to Load all product by making HTTP Request
-     */
+
     class LoadAllProducts extends AsyncTask<String, String, String> {
-
-        /**
+/*
+*
          * Before starting background thread Show Progress Dialog
          */
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -91,9 +96,10 @@ public class AllProductsActivity extends ListActivity {
             pDialog.show();
         }
 
-        /**
-         * getting All products from url
-         */
+/**
+         * getting All products from url*/
+
+
         protected String doInBackground(String... args) {
             // Building Parameters
             List<NameValuePair> params = new ArrayList<NameValuePair>();
@@ -117,54 +123,60 @@ public class AllProductsActivity extends ListActivity {
                         JSONObject c = products.getJSONObject(i);
 
                         // Storing each json item in variable
-                        String id = c.getString(TAG_PID);
+//                        String id = c.getString(TAG_PID);
                         String name = c.getString(TAG_NAME);
-                        String abv = c.getString("ABV");
+                        String location = c.getString(TAG_LOCATION) + ".";
+                        String qoh = c.getString(TAG_QOH);
+                        //String abv = c.getString("Genre");
 
                         // creating new HashMap
                         HashMap<String, String> map = new HashMap<String, String>();
 
                         // adding each child node to HashMap key => value
-                        map.put(TAG_PID, id);
+                      //  map.put(TAG_PID, id);
                         map.put(TAG_NAME, name);
-                        map.put("ABV", abv);
+                        map.put(TAG_LOCATION,location);
+                        map.put(TAG_QOH, qoh);
 
                         // adding HashList to ArrayList
                         productsList.add(map);
                     }
-                } else {
+                }/* else {
                     // no products found
                     // Launch Add New product Activity
-                    /*Intent i = new Intent(getApplicationContext(),
+Intent i = new Intent(getApplicationContext(),
                             NewProductActivity.class);
                     // Closing all previous activities
                     i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(i);*/
-                }
+                    startActivity(i);
+
+                }*/
             } catch (JSONException e) {
                 e.printStackTrace();
             }
 
             return null;
         }
-
-        /**
+/*
+*
          * After completing background task Dismiss the progress dialog
          **/
+
         protected void onPostExecute(String file_url) {
             // dismiss the dialog after getting all products
             pDialog.dismiss();
             // updating UI from Background Thread
             runOnUiThread(new Runnable() {
                 public void run() {
-                    /**
+/**
                      * Updating parsed JSON data into ListView
                      * */
+
                     ListAdapter adapter = new SimpleAdapter(
                             AllProductsActivity.this, productsList,
-                            R.layout.list_item, new String[]{TAG_PID,
-                            TAG_NAME, "ABV"},
-                            new int[]{R.id.pid, R.id.name, R.id.abv});
+                            R.layout.list_item_inventory, new String[]{
+                            TAG_LOCATION, TAG_NAME, TAG_QOH},
+                            new int[]{ R.id.pid, R.id.name, R.id.abv});
                     // updating listview
 
                     setListAdapter(adapter);

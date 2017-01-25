@@ -73,7 +73,7 @@ public class SearchActivity extends AppCompatActivity {
         // Loading products in Background Thread
         //new LoadAllProducts().execute();
 
-        /*adapter = new SimpleAdapter(
+/*        adapter = new SimpleAdapter(
                 SearchActivity.this, productsList,
                 R.layout.list_item, new String[]{
                 TAG_NAME},
@@ -119,17 +119,27 @@ public class SearchActivity extends AppCompatActivity {
         final MenuItem searchItem = menu.findItem(R.id.search);
         //searchItem.expandActionView();
         searchView = (android.support.v7.widget.SearchView) menu.findItem(R.id.search).getActionView();
-        //searchView.onActionViewExpanded();
-        //searchView.clearFocus();
-        //searchView.setIconified(false);
-        //searchView.requestFocusFromTouch();
+        searchView.onActionViewExpanded();
+        searchView.clearFocus();
+        searchView.setIconified(false);
+        searchView.requestFocusFromTouch();
 
         searchView.setOnQueryTextListener(new android.support.v7.widget.SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                query = query.replace(" ", "%20");
                 url_all_products = "http://www.ezbar.nyc/android_connect/get_all_productsSearchtest.php?Name=" + query;
+/*                adapter = new SimpleAdapter(
+                        SearchActivity.this, productsList,
+                        R.layout.list_item, new String[]{
+                        ""},
+                        new int[]{ R.id.name});
+                list.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+
                 //list.setAdapter(null);
-                list.clearChoices();
+                list.clearChoices();*/
+                productsList.clear();
                 new LoadAllProducts().execute();
 /*                adapter.notifyDataSetChanged();
                 list.setAdapter(adapter);*/
@@ -140,8 +150,8 @@ public class SearchActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-
-                return false;
+                productsList.clear();
+                return true;
             }
 
         });
@@ -215,7 +225,7 @@ public class SearchActivity extends AppCompatActivity {
                         JSONObject c = products.getJSONObject(i);
 
                         // Storing each json item in variable
-                        String id = c.getString(TAG_PID);
+                        //String id = c.getString(TAG_PID);
                         String name = c.getString(TAG_NAME);
                         String abv = c.getString("ABV");
 
@@ -223,7 +233,7 @@ public class SearchActivity extends AppCompatActivity {
                         HashMap<String, String> map = new HashMap<String, String>();
 
                         // adding each child node to HashMap key => value
-                        map.put(TAG_PID, id);
+                        //map.put(TAG_PID, id);
                         map.put(TAG_NAME, name);
                         map.put("ABV", abv);
 
@@ -256,6 +266,7 @@ Intent i = new Intent(getApplicationContext(),
         protected void onPostExecute(String file_url) {
             // dismiss the dialog after getting all products
             pDialog.dismiss();
+            //list.invalidateViews();
 
             // updating UI from Background Thread
             runOnUiThread(new Runnable() {
@@ -275,10 +286,10 @@ Intent i = new Intent(getApplicationContext(),
                     adapter = new SimpleAdapter(
                             SearchActivity.this, productsList,
                             R.layout.list_item, new String[]{
-                            TAG_NAME},
-                            new int[]{ R.id.name});
+                            TAG_NAME, "ABV"},
+                            new int[]{ R.id.name, R.id.abv});
                     // updating listview
-                    list.invalidate();
+                    //list.invalidateViews();
                     list.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
                     //setListAdapter(adapter);

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <TextView
+        android:text="Loc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dip"
+        android:textStyle="bold"
+        android:paddingTop="6dip"
+        android:paddingLeft="6dip"
+        android:id="@+id/rid" /><![CDATA[ />
+
+    ]]>
+
+    <TextView
+        android:text="QoH(mL)"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:paddingTop="6dip"
+        android:paddingRight="3dip"
+        android:textSize="20dip"
+        android:textStyle="bold"
+        android:id="@+id/rtitle2" />
+    <ListView
+        android:id="@android:id/list"
+        android:layout_width="fill_parent"
+        android:layout_below="@id/rtitle"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:text="Liquids"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dip"
+        android:textStyle="bold"
+        android:paddingTop="6dip"
+        android:paddingLeft="10dp"
+        android:id="@+id/rtitle"
+        android:layout_centerHorizontal="true"
+         />
+</RelativeLayout>
