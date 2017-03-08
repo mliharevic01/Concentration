@@ -5,5 +5,13 @@
         android:id="@+id/action_settings"
         android:orderInCategory="100"
         android:title="@string/action_settings"
-        app:showAsAction="never" />
+        android:icon="@drawable/ic_refresh"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/addBottle"
+        android:orderInCategory="100"
+        android:title="Add Liquid"
+        android:icon="@drawable/ic_add_drink"
+        android:showAsAction="always"
+        />
 </menu>

@@ -37,12 +37,16 @@ public class AllProductsActivity extends ListActivity {
 
     private String url_all_products;
 
+    HashMap<String, String> map;
+
     // JSON Node names
     private static final String TAG_SUCCESS = "success";
     private static final String TAG_PRODUCTS = "Inventory";
     private static final String TAG_LOCATION = "LocationNumber";
     private static final String TAG_NAME = "Liquid_Name";
     private static final String TAG_QOH = "QoH";
+    private static final String TAG_TQ = "TQ";
+
     // products JSONArray
     JSONArray products = null;
 
@@ -102,7 +106,7 @@ public class AllProductsActivity extends ListActivity {
 
         protected String doInBackground(String... args) {
             // Building Parameters
-            List<NameValuePair> params = new ArrayList<NameValuePair>();
+            HashMap<String,String > params = new HashMap<>();
             // getting JSON string from URL
             JSONObject json = jParser.makeHttpRequest(url_all_products, "POST", params);
 
@@ -127,16 +131,18 @@ public class AllProductsActivity extends ListActivity {
                         String name = c.getString(TAG_NAME);
                         String location = c.getString(TAG_LOCATION) + ".";
                         String qoh = c.getString(TAG_QOH);
+                        String tq = c.getString(TAG_TQ);
                         //String abv = c.getString("Genre");
 
                         // creating new HashMap
-                        HashMap<String, String> map = new HashMap<String, String>();
+                        map = new HashMap<String, String>();
 
                         // adding each child node to HashMap key => value
                       //  map.put(TAG_PID, id);
                         map.put(TAG_NAME, name);
                         map.put(TAG_LOCATION,location);
                         map.put(TAG_QOH, qoh);
+                        map.put(TAG_TQ, tq);
 
                         // adding HashList to ArrayList
                         productsList.add(map);

@@ -30,11 +30,11 @@ public class RecipesActivity extends ListActivity {
     ArrayList<HashMap<String, String>> productsList;
 
     // url to get all products list
-    private static String url_all_products = "http://ezbar.nyc/android_connect/Recipies.php";
+    private static String url_all_products = "http://www.ezbar.nyc/android_connect/AllRecipes.php";
 
     // JSON Node names
     private static final String TAG_SUCCESS = "success";
-    private static final String TAG_PRODUCTS = "Liquids";
+    private static final String TAG_PRODUCTS = "Inventory";
     //private static final String TAG_PID = "L_PK";
     private static final String TAG_NAME = "Recipe_Name";
 
@@ -93,7 +93,7 @@ public class RecipesActivity extends ListActivity {
          */
         protected String doInBackground(String... args) {
             // Building Parameters
-            List<NameValuePair> params = new ArrayList<NameValuePair>();
+            HashMap<String,String > params = new HashMap<>();
             // getting JSON string from URL
 
             JSONObject json = jParser.makeHttpRequest(url_all_products, "POST", params);
@@ -118,9 +118,26 @@ public class RecipesActivity extends ListActivity {
                         //String id = c.getString(TAG_PID);
                         String name = c.getString(TAG_NAME);
                         String Ingredients;
-                        String one = c.getString("Ingredient");
+                        String one = c.getString("ing1");
+
                         String two = c.getString("ing2");
+                        if(two.equals("null")){two = "";}
+                        String three = c.getString("ing3");
+                        if(three.equals("null")){three = "";}
+                        System.out.println(three);
+                        String four = c.getString("ing4");
+                        if(four.equals("null")){four = "";}
+                        System.out.println(four);
+                        String five = c.getString("ing5");
+                        if(five.equals("null")){five = "";}
+                        System.out.println(five);
                         Ingredients = one + ", " + two;
+
+
+                        if (three.equals("")){Ingredients = one + ", " + two ;}
+                        else if(four.equals("")){Ingredients = one + ", " + two + ", " + three ;}
+                        else if(five.equals("")){Ingredients = one + ", " + two + ", " + three + ", " + four;}
+                        else{Ingredients = one + ", " + two + ", " + three + ", " + four + ", " + five ;}
 
                         // creating new HashMap
                         HashMap<String, String> map = new HashMap<String, String>();

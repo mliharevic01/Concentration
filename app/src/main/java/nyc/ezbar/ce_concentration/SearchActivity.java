@@ -203,7 +203,7 @@ public class SearchActivity extends AppCompatActivity {
 
         protected String doInBackground(String... args) {
             // Building Parameters
-            List<NameValuePair> params = new ArrayList<NameValuePair>();
+            HashMap<String,String > params = new HashMap<>();
             // getting JSON string from URL
             JSONObject json = jParser.makeHttpRequest(url_all_products, "POST", params);
 
