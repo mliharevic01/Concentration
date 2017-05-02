@@ -90,6 +90,7 @@ public class InsertActivity extends AppCompatActivity {
         // Hashmap for ListView
         productsList = new ArrayList<HashMap<String, String>>();
 
+        //Links for products and inventory
         url_all_products = "http://www.ezbar.nyc/android_connect/PullFromInventory.php";
         urlUpdateInventory = "http://www.ezbar.nyc/android_connect/InsertItemIntoInventory.php?";
 
@@ -97,35 +98,15 @@ public class InsertActivity extends AppCompatActivity {
         // Loading products in Background Thread
         new LoadAllProducts().execute();
 
+        // Creates spinner variables
         mySpinner=(Spinner) findViewById(R.id.spinner1);
-
-       /* mySpinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                locationB = mySpinner.getSelectedItem().toString();
-            }
-
-        });*/
-
         mySpinner2=(Spinner) findViewById(R.id.spinner2);
-        /*mySpinner2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                liquorB = mySpinner2.getSelectedItem().toString();
-            }
-        });*/
-
         mySpinner3=(Spinner) findViewById(R.id.spinner3);
-       /* mySpinner3.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                tQuantity = mySpinner3.getSelectedItem().toString();
-            }
-        });*/
 
 
+        //Creates edittext Variables
         edittext = (EditText) findViewById(R.id.editText);
+        //Sets Filter to only except certain input from User
         edittext.setFilters(new InputFilter[]{new InputFilterMinMax("0", "2000")});
 
         submit = (Button) findViewById(R.id.button);
@@ -138,14 +119,21 @@ public class InsertActivity extends AppCompatActivity {
                 liquorB = mySpinner2.getSelectedItem().toString();
                 tQuantity = mySpinner3.getSelectedItem().toString();
                 editText = edittext.getText().toString();
-                if(Integer.parseInt(editText) > Integer.parseInt(tQuantity))
+
+                //Sets Text so user sees that they need to enter quantity
+                if (editText.equals(""))
+                {
+                    Toast.makeText(InsertActivity.this, "Please enter a Quantity", Toast.LENGTH_LONG).show();
+                }
+                //Chacks
+                else if(Integer.parseInt(editText) > Integer.parseInt(tQuantity))
                 {
                     Toast.makeText(InsertActivity.this, "You cannot enter a value that is larger the Total Quantity", Toast.LENGTH_LONG).show();
                     edittext.setText("");
                    //edittext.setFilters(new InputFilter[]{new InputFilterMinMax(tQuantity, tQuantity)});
                 }
 
-                if(locationB != "" && liquorB != "" && tQuantity != "" && tQuantity != "" && Integer.parseInt(editText) < Integer.parseInt(tQuantity))
+                else if(locationB != "" && liquorB != "" && tQuantity != "" && tQuantity != "" && Integer.parseInt(editText) < Integer.parseInt(tQuantity))
                 {
                     int length = liquorB.length();
                     char[] chars = liquorB.toCharArray();
@@ -248,7 +236,6 @@ Intent i = new Intent(getApplicationContext(),
                 }
             }
         });
-
 
     }
 
